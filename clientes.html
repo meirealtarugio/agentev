@@ -1,0 +1,260 @@
+<!--/**
+ * Copyright 2023 Prof. Ms. Ricardo Leme All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Bootstrap 5 CSS-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Boostrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/fatecitu.png" />
+  <link rel="stylesheet" href="css/estilo.css" />
+  <title>Menu Inicial</title>
+</head>
+
+<body onload="verificaLogado();obtemClientes()">
+  <nav class="navbar navbar-expand-lg navbar-sucess bg-warner">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Lojão de Móveis</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="home.html"><i class="bi bi-house"></i> Início</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="clientes.html"><i class="bi bi-person-vcard"></i> Resultados</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="planos.html"><i class="bi bi-award"></i> Relatórios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="relatorio-clientes.html"><i class="bi bi-journal-check"></i> Plano de Ação</a>
+          </li>
+        </ul>
+      </div>
+      <div class="text-right">
+        <ul class="navbar-nav ms-auto flex-nowrap">
+          <div id="imagemUsuario"></div>
+          <li class="nav-item">
+            <button class="btn btn-sm btn-block btn-danger" onclick="logoutFirebase()">
+              <i class="bi bi-box-arrow-in-right"></i> Logout
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid p-2 bg-dark text-light text-center">
+    <h1>AGENTE V</h1>
+  </div>
+  <div id="mensagemAlerta"></div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card-header">
+          <h5 class="card-title text-primary">
+            Dados Gerais
+          </h5>
+        </div>
+        <div class="card shadow-lg rounded">
+          <div class="card-body">
+            <!-- Formulário-->
+            <form class="form-horizontal" id="formCliente">
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="id">Código</label>
+                <div class="col-md-6">
+                  <input id="id" name="id" type="text" placeholder="Gerado automaticamente"
+                    class="form-control input-md" readonly>
+
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="nome">Filial</label>
+                <div class="col-md-7">
+                  <select name="filial" id="filial" required class="form-control">
+                    <option value="">Selecione...</option>
+                    <option value="002">002- Itu Centro</option>
+                    <option value="180">180- Itu Cidade Nova</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="nomeVendedor">Nome do Vendedor</label>
+                <div class="col-md-12">
+                  <input id="nomeVendedor" name="nomeVendedor" type="text" placeholder="Informe o nome completo"
+                    class="form-control input-md" required="">
+
+                </div>
+              </div>
+              <div class="card shadow-lg rounded text-white bg-primary">
+                <div class="card-header">APONTE</div>
+                <div class="card-body">
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-8 control-label" for="notaA"><span class='text-warning'>A</span>borde Positivamente</label>
+                <div class="col-md-4">
+                  <input id="notaA" name="notaA" type="number" min="0" max="10" placeholder="Nota" step="0"
+                    class="form-control input-md">
+
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-8 control-label" for="notaP"><span class='text-warning'>P</span>esquise 0 Cliente</label>
+                <div class="col-md-4">
+                  <input id="notaP" name="notaP" type="number" min="0" max="10" placeholder="Nota"
+                    class="form-control input-md">
+
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-12 control-label" for="notaO"><span class='text-warning'>O</span>fereça uma Demonstração Envolvente</label>
+                <div class="col-md-4">
+                  <input id="notaO" name="notaO" type="number" min="0" max="10" placeholder="Nota"
+                    class="form-control input-md">
+                </div>
+              </div>
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-12 control-label" for="notaN"><span class='text-warning'>N</span>eutralize Objeções</label>
+                <div class="col-md-4">
+                  <input id="notaN" name="notaN" type="number" min="0" max="10" placeholder="Nota"
+                    class="form-control input-md">
+
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-60 control-label" for="altura"><span class='text-warning'>T</span>ome a Iniciativa e Feche a Venda</label>
+                <div class="col-md-4">
+                  <input id="notaT" name="notaT" type="number" min="0" max="10" placeholder="Nota"
+                    class="form-control input-md">
+
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-16 control-label" for="altura"><span class='text-warning'>E</span>stenda o Relacionamento</label>
+                <div class="col-md-4">
+                  <input id="notaE" name="notaE" type="number" min="0" max="10" placeholder="Nota"
+                    class="form-control input-md">
+
+                </div>
+              </div>
+
+                </div>
+              </div>
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="dataDa Visita">Data da visita</label>
+          <div class="col-md-6">
+            <input id="nascimento" name="nascimento" type="date" placeholder="" class="form-control input-md"
+              required="">
+
+          </div>
+        </div>
+
+        <!-- Multiple Radios (inline) -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="sexo">Setor</label>
+          <div class="col-md-6">
+            <label class="radio-inline" for="sexo-0">
+              <input type="radio" name="sexo" id="sexo-0" value="Masculino" checked="checked">
+              Geral
+            </label>
+            <label class="radio-inline" for="sexo-1">
+              <input type="radio" name="sexo" id="sexo-1" value="Feminino">
+              Portátil
+            </label>
+          </div>
+        </div>
+
+        <!-- Button (Double) -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="salvar"></label>
+          <div class="col-md-8">
+            <button type="submit" id="salvar" name="salvar" class="btn btn-success">Salvar</button>
+            <button type="reset" id="limpar" name="limpar" class="btn btn-danger">Limpar</button>
+          </div>
+        </div>
+
+        </fieldset>
+        </form>
+      </div>
+      <div class="card-footer">
+        Campos com * são obrigatórios
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+
+    <button class="btn btn-info" type="button" disabled id="carregandoDados">
+      <span class="spinner-border spinner-border-sm" role="status"></span> Carregando os dados...
+    </button>
+    <!-- campo de filtro -->
+    <div class="form-group mt-3">
+      <input type="text" class="form-control" id="filtroCliente" placeholder="🔍 Filtrar..."
+        oninput="filtrarTabela('filtroCliente','tabelaDados')">
+    </div>
+    <!-- tabela -->
+    <table class="table table-bordered table-striped" id="tabelaDados">
+      <!-- conteúdo obtido no Firebase será inserido aqui -->
+    </table>
+  </div>
+  </div>
+  </div>
+
+  <footer class="bd-footer py-1 bg-warning text-light fixed-bottom">
+    <div class="container py-1">
+      <div class="row">
+        <div class="col-md-6">
+          <p>lojão de Móveis &copy; - Todos os direitos reservados</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Carregando os scripts do Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-storage-compat.js"></script>
+  <!-- Carregamento dos scripts do projeto-->
+  <script src="js/firebase/firebase.js"></script>
+  <script src="js/firebase/authentication.js"></script>
+  <script src="js/util/alerta.js"></script>
+  <script src="js/firebase/clientes.js"></script>
+</body>
+
+</html>
