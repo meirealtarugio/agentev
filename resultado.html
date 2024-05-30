@@ -43,13 +43,13 @@
             <a class="nav-link active" aria-current="page" href="home.html"><i class="bi bi-house"></i> Início</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="clientes.html"><i class="bi bi-person-vcard"></i> Resultados</a>
+            <a class="nav-link" href="resultado.html"><i class="bi bi-person-vcard"></i> Resultados</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="planos.html"><i class="bi bi-award"></i> Relatórios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="relatorio-clientes.html"><i class="bi bi-journal-check"></i> Plano de Ação</a>
+            <a class="nav-link" href="relatorio-resultados.html"><i class="bi bi-journal-check"></i> Plano de Ação</a>
           </li>
         </ul>
       </div>
@@ -85,7 +85,7 @@
               <!-- Text input-->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="id">Código</label>
-                <div class="col-md-6">
+                <div class="col-md-10">
                   <input id="id" name="id" type="text" placeholder="Gerado automaticamente"
                     class="form-control input-md" readonly>
 
@@ -98,22 +98,41 @@
                 <div class="col-md-7">
                   <select name="filial" id="filial" required class="form-control">
                     <option value="">Selecione...</option>
+                    <option value="000">000- Salto</option>
+                    <option value="001">001- Indaiatuba</option>
                     <option value="002">002- Itu Centro</option>
-                    <option value="180">180- Itu Cidade Nova</option>
-                  </select>
+                    <option value="003">003- São Roque</option>
+                    <option value="004">004- Itapetininga</option>
+                    <option value="005">005- Sorocaba</option>
+                    <option value="006">006- Americana</option>
+                    <option value="007">007- Rio Claro</option>
+                    <option value="008">008- Piracicaba</option>
+                    <option value="010">010- Sta Bárbara D'Oeste</option>
+                    <option value="011">011- Limeira</option>
+                    <option value="012">012- Osasco</option>
+                    <option value="013">013- Araras</option>
+                    <option value="014">014- Leme</option>
+                    <option value="015">015- Mogi das Cruzes</option>
+                    <option value="016">016- Capivari</option>
+                    <option value="017">017- Avaré</option>
+                    <option value="018">018- Araraquara</option>
+                    <option value="019">019- São Caetano do Sul</option>
+                    <option value="020">020- Suzano</option>
+                    
+                    </select>
                 </div>
               </div>
 
               <!-- Text input-->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="nomeVendedor">Nome do Vendedor</label>
+                <label class="col-md-6 control-label" for="nomeVendedor">Nome do Vendedor</label>
                 <div class="col-md-12">
                   <input id="nomeVendedor" name="nomeVendedor" type="text" placeholder="Informe o nome completo"
                     class="form-control input-md" required="">
 
                 </div>
               </div>
-              <div class="card shadow-lg rounded text-white bg-primary">
+              <div class="card shadow-lg rounded text-white bg-primary mt-2">
                 <div class="card-header">APONTE</div>
                 <div class="card-body">
               <!-- Text input-->
@@ -128,7 +147,7 @@
 
               <!-- Text input-->
               <div class="form-group">
-                <label class="col-md-8 control-label" for="notaP"><span class='text-warning'>P</span>esquise 0 Cliente</label>
+                <label class="col-md-8 control-label" for="notaP"><span class='text-warning'>P</span>esquise o Cliente</label>
                 <div class="col-md-4">
                   <input id="notaP" name="notaP" type="number" min="0" max="10" placeholder="Nota"
                     class="form-control input-md">
@@ -138,7 +157,7 @@
 
               <!-- Text input-->
               <div class="form-group">
-                <label class="col-md-12 control-label" for="notaO"><span class='text-warning'>O</span>fereça uma Demonstração Envolvente</label>
+                <label class="col-md-8 control-label" for="notaO"><span class='text-warning'>O</span>fereça uma Demonstração Envolvente</label>
                 <div class="col-md-4">
                   <input id="notaO" name="notaO" type="number" min="0" max="10" placeholder="Nota"
                     class="form-control input-md">
@@ -146,7 +165,7 @@
               </div>
               <!-- Text input-->
               <div class="form-group">
-                <label class="col-md-12 control-label" for="notaN"><span class='text-warning'>N</span>eutralize Objeções</label>
+                <label class="col-md-12 control-label" for="notaN"><span class='text-warning'>N</span>egocie e Neutralize Objeções</label>
                 <div class="col-md-4">
                   <input id="notaN" name="notaN" type="number" min="0" max="10" placeholder="Nota"
                     class="form-control input-md">
@@ -178,9 +197,9 @@
               </div>
         <!-- Text input-->
         <div class="form-group">
-          <label class="col-md-4 control-label" for="dataDa Visita">Data da visita</label>
+          <label class="col-md-4 control-label" for="dataDaVisita">Data da visita</label>
           <div class="col-md-6">
-            <input id="nascimento" name="nascimento" type="date" placeholder="" class="form-control input-md"
+            <input id="dataDaVisita" name="dataDaVisita" type="date" placeholder="" class="form-control input-md"
               required="">
 
           </div>
@@ -188,14 +207,14 @@
 
         <!-- Multiple Radios (inline) -->
         <div class="form-group">
-          <label class="col-md-4 control-label" for="sexo">Setor</label>
+          <label class="col-md-4 control-label" for="setor">Setor</label>
           <div class="col-md-6">
-            <label class="radio-inline" for="sexo-0">
-              <input type="radio" name="sexo" id="sexo-0" value="Masculino" checked="checked">
+            <label class="radio-inline" for="setor-0">
+              <input type="radio" name="setor" id="setor-0" value="Geral" checked="checked">
               Geral
             </label>
-            <label class="radio-inline" for="sexo-1">
-              <input type="radio" name="sexo" id="sexo-1" value="Feminino">
+            <label class="radio-inline" for="setor-1">
+              <input type="radio" name="setor" id="setor-1" value="Portátil">
               Portátil
             </label>
           </div>
@@ -236,7 +255,7 @@
   </div>
   </div>
 
-  <footer class="bd-footer py-1 bg-warning text-light fixed-bottom">
+  <footer class="bd-footer py-1 bg-warning text-dark fixed-bottom">
     <div class="container py-1">
       <div class="row">
         <div class="col-md-6">
@@ -254,7 +273,7 @@
   <script src="js/firebase/firebase.js"></script>
   <script src="js/firebase/authentication.js"></script>
   <script src="js/util/alerta.js"></script>
-  <script src="js/firebase/clientes.js"></script>
+  <script src="js/firebase/resultado.js"></script>
 </body>
 
 </html>

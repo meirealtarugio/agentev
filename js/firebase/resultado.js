@@ -2,23 +2,17 @@ document.getElementById('formCliente')
   .addEventListener('submit', function (event) {
     event.preventDefault() //evita recarregar
     //efetuando validações
-    if (document.getElementById('nomeVendedor').value.length < 5) {
-      alerta('⚠ O nome é muito curto!', 'warning')
-      document.getElementById('nomeVendedor').focus()
-    } else if (document.getElementById('nomeVendedor').value.length > 100) {
-      alerta('⚠ O nome é muito longo!', 'warning')
-      document.getElementById('nomeVendedor').focus()
-    }
+    
     //criando o objeto cliente
-    //campo sexo
-    let sexoSelecionado = ''
-    if (document.getElementById('sexo-0').checked) {
-      sexoSelecionado = 'Masculino'
-    } else { sexoSelecionado = 'Feminino' }
+    //campo setor
+    let setorSelecionado = ''
+    if (document.getElementById('setor-0').checked) {
+      setorSelecionado = 'Geral'
+    } else { setorSelecionado = 'Portátil' }
 
     const dadosCliente = {
       nomeVendedor: document.getElementById('nomeVendedor').value,
-      nascimento: document.getElementById('nascimento').value,
+      nascimento: document.getElementById('dataDaVisita').value,
       filial: document.getElementById('filial').value,
       notaA: document.getElementById('notaA').value,
       notaP: document.getElementById('notaP').value,
@@ -26,7 +20,7 @@ document.getElementById('formCliente')
       notaN: document.getElementById('notaN').value,
       notaT: document.getElementById('notaT').value,
       notaE: document.getElementById('notaE').value,
-      sexo: sexoSelecionado
+      setor: setorSelecionado
     }
     //testando...
     //alert(JSON.stringify(dadosCliente))
@@ -42,7 +36,7 @@ async function incluir(event, collection, dados) {
   event.preventDefault()
   return await firebase.database().ref(collection).push(dados)
     .then(() => {
-      alerta('✅Cliente incluído com sucesso!', 'success')
+      alerta('✅Vendedor incluído com sucesso!', 'success')
       document.getElementById('formCliente').reset()//limpa
     })
     .catch(error => {
@@ -54,7 +48,7 @@ async function alterar(event, collection, dados, id) {
   event.preventDefault()
   return await firebase.database().ref().child(collection + '/' + id).update(dados)
     .then(() => {
-      alerta('✅Cliente alterado com sucesso!', 'success')
+      alerta('✅Vendedor alterado com sucesso!', 'success')
       document.getElementById('formCliente').reset()//limpa
     })
     .catch(error => {
@@ -97,7 +91,7 @@ async function obtemClientes() {
       novaLinha.insertCell().textContent = item.val().notaN
       novaLinha.insertCell().textContent = item.val().notaT
       novaLinha.insertCell().textContent = item.val().notaE
-      novaLinha.insertCell().textContent = ((parseInt(item.val().notaA)+parseInt(item.val().notaP)+parseInt(item.val().notaO)+parseInt(item.val().notaN)+parseInt(item.val().notaT)+parseInt(item.val().notaE))/6)
+      novaLinha.insertCell().textContent = ((parseInt(item.val().notaA)+parseInt(item.val().notaP)+parseInt(item.val().notaO)+parseInt(item.val().notaN)+parseInt(item.val().notaT)+parseInt(item.val().notaE))/6).toFixed(2);
            novaLinha.insertCell().innerHTML = `<button class='btn btn-sm btn-danger' title='Apaga o cliente selecionado' onclick=remover('${db}','${id}')> <i class='bi bi-trash'></i> </button>
                                           <button class='btn btn-sm btn-warning' title='Edita o cliente selecionado' onclick=carregaDadosAlteracao('${db}','${id}')> <i class='bi bi-pencil-square'></i> </button>`
     })
@@ -107,14 +101,14 @@ async function obtemClientes() {
 }
 
 async function remover(db, id) {
-  if (window.confirm('⚠ Confirma a exclusão do cliente?')) {
+  if (window.confirm('⚠ Confirma a exclusão do Vendedor?')) {
     let dadosExclusao = await firebase.database().ref().child(db + '/' + id)
     dadosExclusao.remove()
       .then(() => {
-        alerta('✅Cliente removido com sucesso!', 'success')
+        alerta('✅Vendedor removido com sucesso!', 'success')
       })
       .catch(error => {
-        alerta(`❌Falha ao apagar o cliente: ${error.message}`)
+        alerta(`❌Falha ao apagar o Vendedor: ${error.message}`)
       })
   }
 }
@@ -123,14 +117,18 @@ async function carregaDadosAlteracao(db, id) {
   await firebase.database().ref(db + '/' + id).on('value', (snapshot) => {
     document.getElementById('id').value = id
     document.getElementById('filial').value = snapshot.val().filial
-    document.getElementById('email').value = snapshot.val().nomeVendedor
-    document.getElementById('peso').value = snapshot.val().peso
-    document.getElementById('altura').value = snapshot.val().altura
-    document.getElementById('nascimento').value = snapshot.val().nascimento
-    if (snapshot.val().sexo === 'Feminino') {
-      document.getElementById('sexo-1').checked = true
+    document.getElementById('nomeVendedor').value = snapshot.val().nomeVendedor
+    document.getElementById('letraA').value = snapshot.val().letraA
+    document.getElementById('letraP').value = snapshot.val().letraP
+    document.getElementById('letraO').value = snapshot.val().letraO
+    document.getElementById('letraN').value = snapshot.val().letraN
+    document.getElementById('letraT').value = snapshot.val().letraT
+    document.getElementById('letraE').value = snapshot.val().letraE
+    document.getElementById('dataDaVisita').value = snapshot.val().dataDaVisita
+    if (snapshot.val().setor === 'Portátil') {
+      document.getElementById('setor-1').checked = true
     } else {
-      document.getElementById('sexo-0').checked = true //Masculino
+      document.getElementById('setor-0').checked = true //Geral
     }
   })
   document.getElementById('nome').focus() //Definimos o foco no campo nome
