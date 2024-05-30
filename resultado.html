@@ -29,7 +29,7 @@
   <title>Menu Inicial</title>
 </head>
 
-<body onload="verificaLogado();obtemClientes()">
+<body onload="verificaLogado();obtemVendedores()">
   <nav class="navbar navbar-expand-lg navbar-sucess bg-warner">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Lojão de Móveis</a>
@@ -80,7 +80,7 @@
         <div class="card shadow-lg rounded">
           <div class="card-body">
             <!-- Formulário-->
-            <form class="form-horizontal" id="formCliente">
+            <form class="form-horizontal" id="formVendedor">
 
               <!-- Text input-->
               <div class="form-group">
@@ -127,7 +127,7 @@
               <div class="form-group">
                 <label class="col-md-6 control-label" for="nomeVendedor">Nome do Vendedor</label>
                 <div class="col-md-12">
-                  <input id="nomeVendedor" name="nomeVendedor" type="text" placeholder="Informe o nome completo"
+                  <input id="nomeVendedor" name="nomeVendedor" type="text" placeholder="Informe o nome de 'guerra'"
                     class="form-control input-md" required="">
 
                 </div>
@@ -244,8 +244,8 @@
     </button>
     <!-- campo de filtro -->
     <div class="form-group mt-3">
-      <input type="text" class="form-control" id="filtroCliente" placeholder="🔍 Filtrar..."
-        oninput="filtrarTabela('filtroCliente','tabelaDados')">
+      <input type="text" class="form-control" id="filtroVendedor" placeholder="🔍 Filtrar..."
+        oninput="filtrarTabela('filtroVendedor','tabelaDados')">
     </div>
     <!-- tabela -->
     <table class="table table-bordered table-striped" id="tabelaDados">

@@ -1,16 +1,16 @@
-document.getElementById('formCliente')
+document.getElementById('formVendedor')
   .addEventListener('submit', function (event) {
     event.preventDefault() //evita recarregar
     //efetuando validações
     
-    //criando o objeto cliente
+    //criando o objeto vendedor
     //campo setor
     let setorSelecionado = ''
     if (document.getElementById('setor-0').checked) {
       setorSelecionado = 'Geral'
     } else { setorSelecionado = 'Portátil' }
 
-    const dadosCliente = {
+    const dadosVendedor = {
       nomeVendedor: document.getElementById('nomeVendedor').value,
       nascimento: document.getElementById('dataDaVisita').value,
       filial: document.getElementById('filial').value,
@@ -23,12 +23,12 @@ document.getElementById('formCliente')
       setor: setorSelecionado
     }
     //testando...
-    //alert(JSON.stringify(dadosCliente))
+    //alert(JSON.stringify(dadosVendedor))
 
     if (document.getElementById('id').value !== '') { //Se existir algo, iremos alterar,
-      alterar(event, 'clientes', dadosCliente, document.getElementById('id').value)
+      alterar(event, 'vendedores', dadosVendedor, document.getElementById('id').value)
     } else {
-      incluir(event, 'clientes', dadosCliente)
+      incluir(event, 'vendedores', dadosVendedor)
     }
   })
 
@@ -37,7 +37,7 @@ async function incluir(event, collection, dados) {
   return await firebase.database().ref(collection).push(dados)
     .then(() => {
       alerta('✅Vendedor incluído com sucesso!', 'success')
-      document.getElementById('formCliente').reset()//limpa
+      document.getElementById('formVendedor').reset()//limpa
     })
     .catch(error => {
       alerta('❌Falha ao incluir: ' + error.message, 'danger')
@@ -49,18 +49,18 @@ async function alterar(event, collection, dados, id) {
   return await firebase.database().ref().child(collection + '/' + id).update(dados)
     .then(() => {
       alerta('✅Vendedor alterado com sucesso!', 'success')
-      document.getElementById('formCliente').reset()//limpa
+      document.getElementById('formVendedor').reset()//limpa
     })
     .catch(error => {
       alerta('❌Falha ao alterar: ' + error.message, 'danger')
     })
 }
 
-async function obtemClientes() {
+async function obtemVendedores() {
   let spinner = document.getElementById('carregandoDados')
   let tabela = document.getElementById('tabelaDados')
 
-  await firebase.database().ref('clientes').orderByChild('nome').on('value', (snapshot) => {
+  await firebase.database().ref('vendedores').orderByChild('nome').on('value', (snapshot) => {
     tabela.innerHTML = ''
     tabela.innerHTML += `
             <tr class='bg-info'>
@@ -92,8 +92,8 @@ async function obtemClientes() {
       novaLinha.insertCell().textContent = item.val().notaT
       novaLinha.insertCell().textContent = item.val().notaE
       novaLinha.insertCell().textContent = ((parseInt(item.val().notaA)+parseInt(item.val().notaP)+parseInt(item.val().notaO)+parseInt(item.val().notaN)+parseInt(item.val().notaT)+parseInt(item.val().notaE))/6).toFixed(2);
-           novaLinha.insertCell().innerHTML = `<button class='btn btn-sm btn-danger' title='Apaga o cliente selecionado' onclick=remover('${db}','${id}')> <i class='bi bi-trash'></i> </button>
-                                          <button class='btn btn-sm btn-warning' title='Edita o cliente selecionado' onclick=carregaDadosAlteracao('${db}','${id}')> <i class='bi bi-pencil-square'></i> </button>`
+           novaLinha.insertCell().innerHTML = `<button class='btn btn-sm btn-danger' title='Apaga o vendedor selecionado' onclick=remover('${db}','${id}')> <i class='bi bi-trash'></i> </button>
+                                          <button class='btn btn-sm btn-warning' title='Edita o vendedor selecionado' onclick=carregaDadosAlteracao('${db}','${id}')> <i class='bi bi-pencil-square'></i> </button>`
     })
   })
   //ocultamos o botão Carregando...
