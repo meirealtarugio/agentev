@@ -5,10 +5,10 @@ CRUD em HTML, CSS e JavaScript integrado ao Firebase
 ## 📄 Descrição
 
 Este projeto foi desenvolvido na disciplina de Programação para a Internet. O objetivo é criar um sistema CRUD (Create, Read, Update, Delete) utilizando tecnologias web (HTML, CSS, JavaScript) integradas ao Firebase.
-
-Ana Laura Pino Ming
-Fábio Luis Altarúgio
-Meire Bandeira de Almeida Altarúgio
+<br/>
+Ana Laura Pino Ming<br/>
+Fábio Luis Altarúgio<br/>
+Meire Bandeira de Almeida Altarúgio<br/>
 
 ## 🗂 Estrutura do Projeto
 
